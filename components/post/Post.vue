@@ -8,7 +8,7 @@
         of the card's content.
       </p>
       <a href="#" @click.prevent="$router.push('/posts/1')" class="btn btn-outline-info btn-sm">Görüntüle</a>
-      <a href="#" class="btn btn-outline-warning btn-sm">Düzenle</a>
+      <a href="#" @click.prevent="$router.push('/admin/1')" class="btn btn-outline-warning btn-sm">Düzenle</a>
       <a href="#" class="btn btn-outline-danger btn-sm">Sil</a>
     </div>
   </div>
