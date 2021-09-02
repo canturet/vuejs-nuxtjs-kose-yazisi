@@ -1,7 +1,3 @@
-<template>
-  <Tutorial/>
-</template>
-
-<script>
-export default {}
-</script>
+<template></template>
+<script></script>
+<style scoped></style>
