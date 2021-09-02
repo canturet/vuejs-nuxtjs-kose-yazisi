@@ -1,7 +1,6 @@
 <template>
   <div>
     <PostList />
-    <About />
   </div>
 </template>
 <script>
