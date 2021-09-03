@@ -1,22 +1,40 @@
 <template>
-  <PostForm :is-update="true" :post="loadedPost" />
+  <PostForm
+    @submit="updatePost($event)"
+    :is-update="true"
+    :post="fetchedPost"
+  />
 </template>
 <script>
+import axios from "axios";
 import PostForm from "@/components/admin/PostForm";
 export default {
   components: {
     PostForm,
   },
-  data() {
-    return {
-      loadedPost: {
-        id: 1,
-        title: "Başlık 1",
-        subTitle: "Alt Başlık 1",
-        text: "Açıklama 1",
-        author: "Yazar 1"
-      },
-    };
+  asyncData(context) {
+    return axios
+      .get(
+        "https://nuxt-js-kose-yazisi-default-rtdb.firebaseio.com/posts/" +
+          context.params.postId +
+          ".json"
+      )
+      .then((response) => {
+        return {
+          fetchedPost: response.data,
+        };
+      });
+  },
+  methods: {
+    updatePost(editedPost) {
+      axios.put(
+        "https://nuxt-js-kose-yazisi-default-rtdb.firebaseio.com/posts/" +
+          this.$route.params.postId +
+          ".json",editedPost
+      ).then(response=>{
+        this.$router.push("/admin")
+      }).catch(e => console.log(e))
+    },
   },
 };
 </script>
