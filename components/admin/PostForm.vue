@@ -15,21 +15,42 @@
         <legend v-else>Yeni Köse Yazısı</legend>
         <div class="form-group">
           <label>Yazar Adı</label>
-          <input v-model="post.author" type="text" class="form-control" placeholder="Yazarın adını giriniz.."/>
+          <input
+            v-model="post.author"
+            type="text"
+            class="form-control"
+            placeholder="Yazarın adını giriniz.."
+          />
         </div>
         <div class="form-group">
           <label>Baslık</label>
-          <input v-model="post.title" type="text" class="form-control" placeholder="Yazının baslıgını giriniz.."/>
+          <input
+            v-model="post.title"
+            type="text"
+            class="form-control"
+            placeholder="Yazının baslıgını giriniz.."
+          />
         </div>
         <div class="form-group">
           <label>Alt Baslık</label>
-          <input v-model="post.subTitle" type="text" class="form-control" placeholder="Yazının alt baslıgını giriniz.."/>
+          <input
+            v-model="post.subTitle"
+            type="text"
+            class="form-control"
+            placeholder="Yazının alt baslıgını giriniz.."
+          />
         </div>
         <div class="form-group">
           <label>Köse Yazısı</label>
-          <textarea v-model="post.text" class="form-control" rows="5"></textarea>
+          <textarea
+            v-model="post.text"
+            class="form-control"
+            rows="5"
+          ></textarea>
         </div>
-        <button class="btn btn-danger" @click="$router.push('/admin')">İptal</button>
+        <button class="btn btn-danger" @click="$router.push('/admin')">
+          İptal
+        </button>
         <button type="submit" class="btn btn-primary">Kaydet</button>
       </fieldset>
     </form>
@@ -38,27 +59,42 @@
 
 <script>
 export default {
-  data(){
+  data() {
     return {
-      post : {
-        title : null,
-        subTitle : null,
-        author : null,
-        text : null
-      }
-    }
+      post: {
+        title: null,
+        subTitle: null,
+        author: null,
+        text: null,
+      },
+    };
   },
-  props : {
-    isUpdate : {
-      type : Boolean,
-      required : false,
-      default : false
-    }
+  props: {
+    isUpdate: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    post: {
+      type: Object,
+      required: false,
+    },
   },
-  methods : {
+  methods: {
     onSubmit() {
-      this.$emit("submit",this.post)
-    }
-  }
-}
+      this.$emit("submit", this.post);
+    },
+  },
+  created() {
+    this.post = this.post
+      ? this.post
+      : {
+          id: null,
+          title: null,
+          subTitle: null,
+          author: null,
+          text: null,
+        };
+  },
+};
 </script>

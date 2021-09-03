@@ -12,6 +12,9 @@ const createStore = () => {
         },
         actions: {
             nuxtServerInit(vuexContext, context) {
+                if(!process.client){
+                    
+                }
                 vuexContext.commit("setPosts", [
                     {
                         id: 1,
