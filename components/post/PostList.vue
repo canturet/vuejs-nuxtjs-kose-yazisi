@@ -9,7 +9,7 @@
       align-items-center
     "
   >
-    <Post v-for="index in 10" :key="index" :is-admin="isAdmin" />
+    <Post v-for="post in posts" :key="post.id" :post="post" :is-admin="isAdmin" />
   </div>
 </template>
 <script>
@@ -23,6 +23,11 @@ export default {
       type : Boolean,
       required : false,
       default : false
+    },
+    posts : {
+      required : true,
+      type : Array,
+      
     }
   }
 };
