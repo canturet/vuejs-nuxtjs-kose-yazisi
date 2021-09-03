@@ -9,6 +9,9 @@
 <script>
 import PostList from "@/components/post/PostList";
 export default {
+  head : {
+    title : 'Admin | Köşe Yazısı'
+  },
   layout: "admin",
   components: {
     PostList,

@@ -15,14 +15,12 @@ const createStore = () => {
             },
             updatePost(state, editedPost) {
                 let postIndex = state.fetchedPosts.findIndex(post => post.id == editedPost.id)
-                if(postIndex !==-1){
-                    state.fetchedPosts[postIndex] = editedPost
-                }
+                state.fetchedPosts[postIndex] = editedPost
             }
         },
         actions: {
             nuxtServerInit(vuexContext, context) {
-                return axios.get("https://nuxt-js-kose-yazisi-default-rtdb.firebaseio.com/posts.json")
+                return context.app.$axios.get(process.env.baseURL+"posts.json")
                     .then(response => {
                         let data = response.data;
                         let postArray = []
@@ -36,18 +34,18 @@ const createStore = () => {
                 vuexContext.commit("setPosts", posts)
             },
             addPost(vuexContext, post) {
-                return axios.post("https://nuxt-js-kose-yazisi-default-rtdb.firebaseio.com/posts.json", post)
+                return this.$axios.post(process.env.baseURL+"posts.json", post)
                     .then(response => {
                         vuexContext.commit("addPost", { ...post, id: response.data.name })
                     })
             },
             updatePost(vuexContext, editedPost) {
-                return axios.put(
-                    "https://nuxt-js-kose-yazisi-default-rtdb.firebaseio.com/posts/" +
-                     editedPost.id+
+                return this.$axios.put(
+                    process.env.baseURL+"posts/" +
+                    editedPost.id +
                     ".json", editedPost
                 ).then(response => {
-                    vuexContext.commit("updatePost",editedPost)
+                    vuexContext.commit("updatePost", editedPost)
                 }).catch(e => console.log(e))
             }
         },

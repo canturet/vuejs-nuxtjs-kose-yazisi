@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'kose-yazisi',
+    title: 'Köşe Yazısı',
     htmlAttrs: {
       lang: 'en'
     },
@@ -12,17 +12,35 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://bootswatch.com/4/sketchy/bootstrap.min.css' }
+    ],
+    script: [
+
     ]
   },
-  loading: {color: '#666'},
+  loading: { 
+    color: '#666',
+    failedColor : 'orange'
+  },
+  
+  env : {
+    baseURL : "https://nuxt-js-kose-yazisi-default-rtdb.firebaseio.com/"
+  },
+
+  transition : {
+    name : "layout",
+    mode : "out-in"
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    "~/assets/style/bootstrap.min.css"
+    "~/assets/style/transition.css"
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    "~/plugins/Components.js"
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -34,6 +52,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    "@nuxtjs/axios"
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
