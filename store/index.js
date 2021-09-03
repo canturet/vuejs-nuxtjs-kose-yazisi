@@ -9,6 +9,12 @@ const createStore = () => {
         mutations: {
             setPosts(state, posts) {
                 state.fetchedPosts = posts
+            },
+            addPost(state, post) {
+                state.fetchedPosts.push(post)
+            },
+            updatePost(state, post) {
+
             }
         },
         actions: {
@@ -17,14 +23,23 @@ const createStore = () => {
                     .then(response => {
                         let data = response.data;
                         let postArray = []
-                        for(let key in data){
-                            postArray.push({id : key, ...data[key]})
+                        for (let key in data) {
+                            postArray.push({ id: key, ...data[key] })
                         }
-                        vuexContext.commit("setPosts",postArray)
+                        vuexContext.commit("setPosts", postArray)
                     })
             },
             setPosts(vuexContext, posts) {
                 vuexContext.commit("setPosts", posts)
+            },
+            addPost(vuexContext, post) {
+                return axios.post("https://nuxt-js-kose-yazisi-default-rtdb.firebaseio.com/posts.json", post)
+                    .then(response => {
+                        vuexContext.commit("addPost",{...post, id:response.data.name })
+                    })
+            },
+            updatePost(vuexContext, post) {
+
             }
         },
         getters: {

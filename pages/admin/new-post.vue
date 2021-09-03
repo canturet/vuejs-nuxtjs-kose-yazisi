@@ -10,8 +10,8 @@ export default {
   },
   methods : {
     savePost(post){
-      axios.post("https://nuxt-js-kose-yazisi-default-rtdb.firebaseio.com/posts.json",post)
-        .then(res => {
+      this.$store.dispatch("addPost",post)
+        .then(response => {
           this.$router.push("/admin")
         })
     }
